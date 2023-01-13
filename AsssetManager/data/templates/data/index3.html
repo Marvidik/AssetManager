@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="asset manager">
+    <meta name="author" content="Marvies Soft Technology">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Admin Dashboard</title>
+
+
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <!-- Fontfaces CSS-->
+    <link href="{% static 'Asset/css/font-face.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'Asset/vendor/font-awesome-4.7/css/font-awesome.min.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'Asset/vendor/font-awesome-5/css/fontawesome-all.min.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'Asset/vendor/mdi-font/css/material-design-iconic-font.min.css'%}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'Asset/vendor/bootstrap-4.1/bootstrap.min.css'%}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'Asset/vendor/animsition/animsition.min.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'Asset/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'Asset/vendor/wow/animate.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'Asset/vendor/css-hamburgers/hamburgers.min.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'Asset/vendor/slick/slick.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'Asset/vendor/select2/select2.min.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'Asset/vendor/perfect-scrollbar/perfect-scrollbar.css'%}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'Asset/css/theme.css'%}" rel="stylesheet" media="all">
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop3 d-none d-lg-block">
+            <div class="section__content section__content--p35">
+                <div class="header3-wrap"  >
+                    <div class="header__logo">
+                        <a href="#">
+                            <img src="{% static 'Asset/images/icon/logo-white.png'%}" alt="CoolAdmin" />
+                        </a>
+                    </div>
+                    <div class="header__navbar">
+                        <ul class="list-unstyled">
+                            <li class="has-sub">
+                                <a href="{% url 'home'%}">
+                                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                                    <span class="bot-line"></span>
+                                </a>
+                            </li>
+                            <li class="has-sub">
+                                <a href="{% url 'register' %}">
+                                    <i class="fas fa-copy"></i>
+                                    <span class="bot-line"></span>Register</a>
+                            </li>
+                            <li class="has-sub">
+                                <a href="{% url 'asset' %}">
+                                    <i class="fas fa-copy"></i>
+                                    <span class="bot-line"></span>All Assets</a>
+                            </li>
+                            <li class="has-sub">
+                                <a href="{% url 'employ' %}">
+                                    <i class="fas fa-desktop"></i>
+                                    <span class="bot-line"></span>Employee Asset</a>
+                            </li>
+                        </ul>
+                    </div>
+                        <div class="account-wrap">
+                            <div class="account-item account-item--style2 clearfix js-item-menu">
+                                <div class="image">
+                                    <img src="{% static 'Asset/images/icon/avatar-01.jpg'%}" alt="John Doe" />
+                                </div>
+                                <div class="content">
+                                    <a class="js-acc-btn" href="#">{{user.username}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- END HEADER DESKTOP-->
+        <!-- PAGE CONTENT-->
+        <div class="page-content--bgf7">
+            <!-- STATISTIC-->
+            <section class="statistic statistic2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="statistic__item statistic__item--orange">
+                                <h2 class="number">{{asset.count}}</h2>
+                                <span class="desc">Total Asset</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-account-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="statistic__item statistic__item--green">
+                                <h2 class="number">{{good}}</h2>
+                                <span class="desc">Total Active Asset</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="statistic__item statistic__item--red">
+                                <h2 class="number">{{bad}}</h2>
+                                <span class="desc">Total Inactive Asset</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--green">
+                                <h2 class="number">{{ location.count}}</h2>
+                                <span class="desc">Total Locations</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-money"></i>
+                                </div>
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+            </section>
+            <!-- END STATISTIC-->
+            <!-- DATA TABLE-->
+            <section class="p-t-20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="title-5 m-b-35">Assets</h3>
+                            <div class="table-data__tool">
+                                <div class="table-data__tool-right">
+                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                        <i class="zmdi zmdi-plus"></i><a href="{% url 'add'%}">add item</a></button>
+                                    <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                        <button class="au-btn au-btn-icon au-btn--black au-btn--small">
+                                        <a href="{% url 'csv'%}">Download</a></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table-responsive-data2">
+                                <table class="table table-data2">
+                                    <thead>
+                                        <tr>
+                                            {% comment %} <th>
+                                                <label class="au-checkbox">
+                                                    <input type="checkbox">
+                                                    <span class="au-checkmark"></span>
+                                                </label>
+                                            </th> {% endcomment %}
+                                            <th>Asset</th>
+                                            <th>Specification</th>
+                                            <th>Location</th>
+                                            <th>Condition</th>
+                                            <th>Date Entered</th>
+                                            <th style="padding-left:200px">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in asset%}
+                                        <tr class="tr-shadow">
+                                            {% comment %} <td>
+                                                <label class="au-checkbox">
+                                                    <input type="checkbox">
+                                                    <span class="au-checkmark"></span>
+                                                </label>
+                                            </td> {% endcomment %}
+                                            <td>{{i.name}}</td>
+                                            <td class="desc">{{i.specifications}}</td>
+                                            <td>{{i.location}}</td>
+                                            {% if i.condition == 'Good' %}
+                                            <td>
+                                                <span class="status--process">{{i.condition}}</span>
+                                            </td>
+                                            {% else%}
+                                            <td>
+                                                <span class="status--denied">{{i.condition}}</span>
+                                            </td>
+                                            {% endif %}
+                                            <td>{{i.date_entered}}</td>
+                                            <td style="padding-left:10px">
+                                                <div class="table-data-feature">
+                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Send" style="padding-left:200px">
+                                                        <i class="zmdi zmdi-mail-send"></i>
+                                                    </button>
+                                                    <a href ="{% url 'update' i.pk %}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                        <i class="zmdi zmdi-edit"></i>
+                                                    </button>
+                                                    <a href="{% url 'delete' i.id%}"><button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                        <i class="zmdi zmdi-delete"></i>
+                                                    </button></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END DATA TABLE-->
+
+            <!-- COPYRIGHT-->
+            <section class="p-t-60 p-b-20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="copyright">
+                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END COPYRIGHT-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'Asset/vendor/jquery-3.2.1.min.js'%}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'Asset/vendor/bootstrap-4.1/popper.min.js'%}"></script>
+    <script src="{% static 'Asset/vendor/bootstrap-4.1/bootstrap.min.js'%}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'Asset/vendor/slick/slick.min.js'%}">
+    </script>
+    <script src="{% static 'Asset/vendor/wow/wow.min.js'%}"></script>
+    <script src="{% static 'Asset/vendor/animsition/animsition.min.js'%}"></script>
+    <script src="{% static 'Asset/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js'%}">
+    </script>
+    <script src="{% static 'Asset/vendor/counter-up/jquery.waypoints.min.js'%}"></script>
+    <script src="{% static 'Asset/vendor/counter-up/jquery.counterup.min.js'%}">
+    </script>
+    <script src="{% static 'Asset/vendor/circle-progress/circle-progress.min.js'%}"></script>
+    <script src="{% static 'Asset/vendor/perfect-scrollbar/perfect-scrollbar.js'%}"></script>
+    <script src="{% static 'Asset/vendor/chartjs/Chart.bundle.min.js'%}"></script>
+    <script src="{% static 'Asset/vendor/select2/select2.min.js'%}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'Asset/js/main.js'%}"></script>
+
+</body>
+
+</html>
+<!-- end document-->
