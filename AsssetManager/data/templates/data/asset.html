@@ -168,9 +168,9 @@
                                             <td>{{i.date_entered}}</td>
                                             <td>
                                                 <div class="table-data-feature">
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Send" style="padding-left:200px">
+                                                    <a href ="{% url 'csv'%}"><button class="item" data-toggle="tooltip" data-placement="top" title="Send" style="padding-left:200px">
                                                         <i class="zmdi zmdi-mail-send"></i>
-                                                    </button>
+                                                    </button></a>
                                                     <a href ="{% url 'update' i.pk %}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="zmdi zmdi-edit"></i>
                                                     </button>
